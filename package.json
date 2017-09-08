@@ -1,0 +1,31 @@
+{
+  "name": "lunch-and-learn-grunt-testing-angular",
+  "version": "0.0.1",
+  "description": "Project to demostrate setting up Protractor, Grunt, Karma, and Angular ",
+  "main": "index.js",
+  "scripts": {
+    "update-webdriver": "webdriver-manager update",
+    "postinstall": "webdriver-manager update",
+    "test": "grunt test",
+    "pretest": "npm install"
+  },
+  "dependencies": {
+    "angular": "^1.6.6",
+    "angular-mocks": "^1.6.6",
+    "grunt": "^1.0.1",
+    "grunt-contrib-connect": "^1.0.2",
+    "grunt-run": "^0.8.0",
+    "jasmine-core": "^2.8.0",
+    "karma": "^1.7.1",
+    "karma-chrome-launcher": "^2.2.0",
+    "karma-coverage": "^1.1.1",
+    "karma-firefox-launcher": "^1.0.1",
+    "karma-jasmine": "^1.1.0",
+    "karma-jshint-preprocessor": "^0.0.6",
+    "karma-junit-reporter": "^1.2.0",
+    "karma-ng-html2js-preprocessor": "^1.0.0",
+    "karma-phantomjs-launcher": "^1.0.4",
+    "lodash": "^4.17.4",
+    "phantomjs": "^2.1.7"
+  }
+}
