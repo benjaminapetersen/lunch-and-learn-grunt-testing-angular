@@ -27,5 +27,8 @@
     "karma-phantomjs-launcher": "^1.0.4",
     "lodash": "^4.17.4",
     "phantomjs": "^2.1.7"
+  },
+  "devDependencies": {
+    "grunt-karma": "^2.0.0"
   }
 }

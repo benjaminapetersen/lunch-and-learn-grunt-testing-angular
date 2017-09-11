@@ -5,9 +5,15 @@ module.exports = function(grunt) {
   grunt.initConfig({
     // connect server
     // https://github.com/gruntjs/grunt-contrib-connect/blob/master/docs/connect-examples.md
+    // start with:
+    // grunt connect:<target_server_name>
+    // stop with:
+    // ps aux | grep grunt
+    // kill <pid_of_running_server>
     connect: {
       // defaults, if not provided by targets below
       options: {},
+      // grunt connect:app_server
       app_server: {
         options: {
             port: 9001,
@@ -32,6 +38,28 @@ module.exports = function(grunt) {
           cert: grunt.file.read('tls/server.crt').toString(),
           ca: grunt.file.read('tls/ca.crt').toString()
         },
+      }
+    },
+    karma: {
+      options: {
+        configFile: 'test/karma.conf.default.js'
+      },
+      // grunt karma:unit
+      unit: {
+        singleRun: true
+      },
+      // grunt karma: continuous
+      continuous: {
+        background:true
+      }
+    },
+    watch: {
+      // a special watch task for karma
+      // grunt watch:karma
+      karma: {
+        files: ['app/js/**/*.js', 'test/unit/*.js'],
+        // not sure why the :run flag is required?
+        tasks: ['karma:continuous:run']
       }
     },
     // run commands
@@ -62,6 +90,7 @@ module.exports = function(grunt) {
   // need to load the plugins (via loadNPMTasks...
   // wish it was called 'loadPlugin')
   grunt.loadNpmTasks('grunt-run');
+  grunt.loadNpmTasks('grunt-karma');
   grunt.loadNpmTasks('grunt-contrib-connect');
 
   // grunt.loadNpmTasks('')
