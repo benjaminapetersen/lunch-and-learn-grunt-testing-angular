@@ -5,6 +5,11 @@
     "angular",
     "describe",
     "it",
-    "expect"
+    "expect",
+    "console",
+    "_",
+    "require",
+    "browser",
+    "by"
   ]
 }
