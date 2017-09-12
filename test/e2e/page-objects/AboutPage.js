@@ -1,6 +1,6 @@
 'use strict';
 
-let Page = require('./page').Page;
+let Page = require('./Page').Page;
 
 class AboutPage extends Page {
   constructor() {

@@ -22,16 +22,26 @@ module.exports = function(grunt) {
       // grunt connect:app_server
       app_server: {
         options: {
-            port: 9001,
+            port: serverPort,
             base: 'app'
         }
       },
       // multiple bases via combine, so we can serve out
       // dependencies from node modules
-      app_with_dependencies: {
+      app_with_deps: {
         options: {
           keepalive: true,
-          port: 9001,
+          port: serverPort,
+          // last directory in the array is browse-able
+          // https://github.com/gruntjs/grunt-contrib-connect#base
+          base: ['node_modules', 'app']
+
+        }
+      },
+      // can't use keepalive flag for the tests or the next task never runs
+      app_with_deps_for_testing: {
+        options: {
+          port: serverPort,
           // last directory in the array is browse-able
           // https://github.com/gruntjs/grunt-contrib-connect#base
           base: ['node_modules', 'app']
@@ -43,7 +53,7 @@ module.exports = function(grunt) {
       // grunt connect:dist_server
       dist_server: {
         options: {
-          port: 9002,
+          port: serverPort,
           base: 'dist'
         }
       },
@@ -84,7 +94,7 @@ module.exports = function(grunt) {
       },
       // grunt protractor:e2e
       e2e_tests: {
-        
+
       }
     },
     watch: {
@@ -129,7 +139,18 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-protractor-runner');
 
 
-  grunt.registerTask('serve', ['connect:app_with_dependencies']);
+  grunt.registerTask('serve', [
+    'connect:app_with_deps'
+  ]);
+
+  //grunt.registerTask('test-unit', '')
+
+  grunt.registerTask('test-e2e', [
+    'connect:app_with_deps_for_testing',
+    'protractor'
+  ]);
+
+  grunt.registerTask('test', ['test-e2e', 'test-unit']);
 
   grunt.registerTask('default', ['serve']);
 };

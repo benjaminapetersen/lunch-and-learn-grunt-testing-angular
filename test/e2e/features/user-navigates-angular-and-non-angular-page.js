@@ -1,9 +1,10 @@
 'use strict';
 
-let HomePage = require('../page-objects/homePage').HomePage;
-let AboutPage = require('../page-objects/aboutPage').AboutPage;
-let UsersPage = require('../page-objects/usersPage').UsersPage;
-let NonAngularPage = require('../page-objects/nonAngularPage').NonAngularPage;
+let HomePage = require('../page-objects/HomePage').HomePage;
+let AboutPage = require('../page-objects/AboutPage').AboutPage;
+let UsersPage = require('../page-objects/UsersPage').UsersPage;
+let NonAngularPage = require('../page-objects/NonAngularPage').NonAngularPage;
+let CreateUserPage = require('../page-objects/CreateUserPage').CreateUserPage;
 
 let nonAngular = require('../helpers/nonAngular').nonAngular;
 // var webdriver = require('selenium-webdriver');
@@ -23,11 +24,22 @@ describe('Navigating between pages', () => {
     nonAngular(() => {
       var nonAngularPage = new NonAngularPage();
       nonAngularPage.visit();
-      var title = browser.driver.findElement(by.css('.title'));
-      title.getText().then((text) => {
+      browser.driver.findElement(by.css('.title')).getText().then((text) => {
         expect(text).toBe('This is not the index');
       });
     });
+
+    // back to angular pages
+    let user = {name: 'Jethro', email: 'Jethro@Jacobs.com'};
+    let createUserPage = new CreateUserPage();
+
+    createUserPage.visit();
+    browser.sleep(500);
+    createUserPage.setName(user.name);
+    createUserPage.setEmail(user.email);
+    createUserPage.submit();
+    expect(createUserPage.getSavedName()).toEqual(user.name);
+    expect(createUserPage.getSavedEmail()).toEqual(user.email);
 
   });
 });

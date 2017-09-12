@@ -35,6 +35,9 @@
             }
           }
         })
+        .when('/create-user', {
+          template: '<create-user></create-user>'
+        })
         .otherwise({
           redirectTo: '/home'
         });
@@ -48,6 +51,9 @@
     }, {
       text: 'Users',
       href:"#!/users"
+    }, {
+      text: 'Create User',
+      href:"#!/create-user"
     }])
     .run(() => {
       _.each([1,2,3], () => {

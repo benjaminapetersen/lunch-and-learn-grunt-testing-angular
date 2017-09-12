@@ -1,6 +1,6 @@
 'use strict';
 
-let Page = require('./page').Page;
+let Page = require('./Page').Page;
 
 class HomePage extends Page {
   constructor() {

@@ -1,0 +1,37 @@
+<h1 class="title">Contact</h1>
+
+<ng-form novalidate>
+  <table>
+    <tr>
+      <td>
+        <label for="name">Name</label>
+      </td>
+      <td>
+        <input type="text" id="name" ng-model="$ctrl.user.name" />
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <label for="email">Email</label>
+      </td>
+      <td>
+        <input type="text" id="email" ng-model="$ctrl.user.email" />
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <input type="button" id="reset" ng-click="$ctrl.reset()" value="Reset" />
+      </td>
+      <td>
+        <input type="submit" id="submit" ng-click="$ctrl.update(user)" value="Save" />
+      </td>
+    </tr>
+  </table>
+</ng-form>
+
+<div id="saved-user">
+  <h2>Saved:</h2>
+  <div id="saved-user-name">{{$ctrl.savedUser.name}}</div>
+  <div id="saved-user-email">{{$ctrl.savedUser.email}}</div>
+  </div>
+</div>

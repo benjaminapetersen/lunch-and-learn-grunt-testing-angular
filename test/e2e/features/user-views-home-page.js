@@ -1,6 +1,6 @@
 'use strict';
 
-let HomePage = require('../page-objects/homePage').HomePage;
+let HomePage = require('../page-objects/HomePage').HomePage;
 
 describe('HomePage', () => {
   it('should have a title', () => {
