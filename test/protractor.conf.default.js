@@ -21,7 +21,7 @@ exports.config = {
   // configure multiple browsers to run tests
   multiCapabilities: [
     {'browserName': 'firefox'},
-  //  {'browserName': 'chrome'}
+    {'browserName': 'chrome'}
   ],
 
   // or configure a single browser
