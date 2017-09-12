@@ -1,10 +1,25 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="myApp">
   <head>
     <meta charset="utf-8">
     <title>Hello</title>
+    <link rel="stylesheet" href="normalize.css/normalize.css">
+    <link rel="stylesheet" href="styles/styles.css">
   </head>
   <body>
-    <h1>Hello</h1>
+
+    <nav></nav>
+    <ng-view></ng-view>
+
+    <!-- libs -->
+    <script type="text/javascript" src="angular/angular.js"></script>
+    <script type="text/javascript" src="angular-route/angular-route.js"></script>
+    <script type="text/javascript" src="lodash/lodash.js"></script>
+    <!-- app -->
+    <script src="./script.js"></script>
+    <script src="components/home/home.js"></script>
+    <script src="components/about/about.js"></script>
+    <script src="components/users/users.js"></script>
+    <script src="components/nav/nav.js"></script>
   </body>
 </html>

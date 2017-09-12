@@ -2,6 +2,12 @@
 
 module.exports = function(grunt) {
 
+  let protocol = 'http://',
+      host = 'localhost',
+      serverPort = 9001,
+      // will use when we setup e2e-test
+      baseUrl = protocol + host + ':' + serverPort;
+
   grunt.initConfig({
     // connect server
     // https://github.com/gruntjs/grunt-contrib-connect/blob/master/docs/connect-examples.md
@@ -18,6 +24,18 @@ module.exports = function(grunt) {
         options: {
             port: 9001,
             base: 'app'
+        }
+      },
+      // multiple bases via combine, so we can serve out
+      // dependencies from node modules
+      app_with_dependencies: {
+        options: {
+          keepalive: true,
+          port: 9001,
+          // last directory in the array is browse-able
+          // https://github.com/gruntjs/grunt-contrib-connect#base
+          base: ['node_modules', 'app']
+
         }
       },
       // could run two servers, one for app and dist separately via:
@@ -51,6 +69,22 @@ module.exports = function(grunt) {
       // grunt karma: continuous
       continuous: {
         background:true
+      }
+    },
+    protractor: {
+      options: {
+        configFile: 'test/protractor.conf.default.js',
+        // stop when fail
+        keepAlive: false,
+        noColor: false,
+        args: {
+          suite: grunt.option('suite') || 'all',
+          baseUrl: grunt.option('baseUrl') || 'baseUrl'
+        }
+      },
+      // grunt protractor:e2e
+      e2e_tests: {
+        
       }
     },
     watch: {
@@ -92,7 +126,10 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-run');
   grunt.loadNpmTasks('grunt-karma');
   grunt.loadNpmTasks('grunt-contrib-connect');
+  grunt.loadNpmTasks('grunt-protractor-runner');
 
-  // grunt.loadNpmTasks('')
-  grunt.registerTask('serve', ['run:mock_server']);
+
+  grunt.registerTask('serve', ['connect:app_with_dependencies']);
+
+  grunt.registerTask('default', ['serve']);
 };

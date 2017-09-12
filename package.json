@@ -5,6 +5,8 @@
   "main": "index.js",
   "scripts": {
     "update-webdriver": "webdriver-manager update",
+    "update-webdriver-local": "./node_modules/protractor/bin/webdriver-manager update",
+    "install-selenium-server": "./node_modules/grunt-protractor-runner/scripts/webdriver-manager-update",
     "postinstall": "webdriver-manager update",
     "test": "grunt test",
     "pretest": "npm install"
@@ -12,6 +14,7 @@
   "dependencies": {
     "angular": "^1.6.6",
     "angular-mocks": "^1.6.6",
+    "angular-route": "^1.6.6",
     "grunt": "^1.0.1",
     "grunt-contrib-connect": "^1.0.2",
     "grunt-run": "^0.8.0",
@@ -26,9 +29,12 @@
     "karma-ng-html2js-preprocessor": "^1.0.0",
     "karma-phantomjs-launcher": "^1.0.4",
     "lodash": "^4.17.4",
+    "normalize.css": "^7.0.0",
     "phantomjs": "^2.1.7"
   },
   "devDependencies": {
-    "grunt-karma": "^2.0.0"
+    "grunt-karma": "^2.0.0",
+    "grunt-protractor-runner": "^5.0.0",
+    "protractor": "^5.1.2"
   }
 }
