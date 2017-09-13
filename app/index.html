@@ -5,10 +5,15 @@
     <title>Hello</title>
     <link rel="stylesheet" href="normalize.css/normalize.css">
     <link rel="stylesheet" href="styles/styles.css">
+    <style>
+      .ugly-red-outline {
+        outline: 1px dashed #990000;
+      }
+    </style>
   </head>
   <body>
 
-    <nav></nav>
+    <nav link-class="'ugly-red-outline'" foo="bar"></nav>
     <ng-view></ng-view>
 
     <!-- libs -->
