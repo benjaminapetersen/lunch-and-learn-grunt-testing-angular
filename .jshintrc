@@ -3,14 +3,19 @@
   "globalstrict" : "false",
   "predef" : [
     "angular",
+    "console",
+    "_",
+
     "describe",
     "it",
     "expect",
-    "console",
-    "_",
+    "beforeEach",
+
     "require",
     "browser",
     "by",
-    "element"
+    "element",
+    "inject",
+    "module"
   ]
 }

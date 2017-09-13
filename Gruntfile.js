@@ -76,7 +76,8 @@ module.exports = function(grunt) {
       unit: {
         singleRun: true
       },
-      // grunt karma: continuous
+      // grunt karma:continuous
+      // used with grunt watch:karma... 
       continuous: {
         background:true
       }
@@ -143,7 +144,7 @@ module.exports = function(grunt) {
     'connect:app_with_deps'
   ]);
 
-  //grunt.registerTask('test-unit', '')
+  grunt.registerTask('test-unit', 'karma');
 
   grunt.registerTask('test-e2e', [
     'connect:app_with_deps_for_testing',

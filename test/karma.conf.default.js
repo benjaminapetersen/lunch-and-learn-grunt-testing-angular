@@ -5,9 +5,13 @@
 let _ = require('lodash');
 
 // since we need them both in files & referenced in preprocessors
+let stripTemplatePrefix = 'app/';
 let templates = [
-  'app/views/directives/*.html',
-  'app/views/pages/*.html'
+  // views ~ pages? prob won't use
+  //'app/views/*.html',
+  // since going the "everything is a component" route,
+  // loading all templates from components dir
+  stripTemplatePrefix + 'components/**/*.html'
 ];
 
 module.exports = function(config) {
@@ -24,13 +28,16 @@ module.exports = function(config) {
       // dependencies
       'node_modules/angular/angular.js',
       'node_modules/angular-mocks/angular-mocks.js',
+      'node_modules/angular-route/angular-route.js',
+      'node_modules/lodash/lodash.js',
       // app
-      'app/js/script.js',
+      'app/script.js',
+      'app/components/**/*.js',
+      'app/components/**/*.html',
       // html files can be part of the files block via
       // the use of the following plugin:
       // yarn add karma-ng-html2js-preprocessor --save-dev
-      templates[0],
-      templates[1],
+      ...templates, // NOTE: the spread operator can combine arrays
       // tests
       'test/unit/**/*.js'
     ],
@@ -41,15 +48,15 @@ module.exports = function(config) {
     autoWatch: false,
     // karma-jasmine plugin installed
     frameworks: ['jasmine'],
-    // runt he tests in all 3 of the browsers!
-    browsers: ['Chrome', 'PhantomJS', 'Firefox'],
+    // run tests in as many browsers as you want
+    browsers: ['Chrome', 'Firefox'],
     // similar to files, plugins must be listed in an array,
     // then specific values from plugins are used elsewhere...
     reporters: ['progress', 'coverage'],
     // though they are loaded via 'files' above,
     // they still need to be referenced here
     preprocessors: _.reduce(templates, function(result, next) {
-      result[next] = 'ng-html2js';
+      result[next] = ['ng-html2js'];
       return result;
     }, {}),
     plugins: [
@@ -72,7 +79,9 @@ module.exports = function(config) {
     // its a little ugly that plugins are configured with top
     // level keys on this config object..
     ngHtml2JsPreprocessor: {
-      // stripPrefix: 'app/'
+      stripPrefix: stripTemplatePrefix,
+      // prependPrefix: '/app/'
+      moduleName: 'templates'
     },
     coverageReporter: {
       type: 'text',
