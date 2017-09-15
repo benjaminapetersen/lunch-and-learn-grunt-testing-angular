@@ -77,7 +77,7 @@ module.exports = function(grunt) {
         singleRun: true
       },
       // grunt karma:continuous
-      // used with grunt watch:karma... 
+      // used with grunt watch:karma...
       continuous: {
         background:true
       }

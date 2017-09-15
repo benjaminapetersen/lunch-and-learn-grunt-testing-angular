@@ -49,10 +49,12 @@ module.exports = function(config) {
     // karma-jasmine plugin installed
     frameworks: ['jasmine'],
     // run tests in as many browsers as you want
-    browsers: ['Chrome', 'Firefox'],
+    browsers: ['Chrome', 'Firefox', 'Nightmare'],
     // similar to files, plugins must be listed in an array,
     // then specific values from plugins are used elsewhere...
     reporters: ['progress', 'coverage'],
+    // possible values: LOG_DISABLE || LOG_ERROR || LOG_WARN || LOG_INFO || LOG_DEBUG
+    logLevel: config.LOG_DEBUG,
     // though they are loaded via 'files' above,
     // they still need to be referenced here
     preprocessors: _.reduce(templates, function(result, next) {
@@ -74,7 +76,8 @@ module.exports = function(config) {
       // browsers
       'karma-chrome-launcher',
       'karma-firefox-launcher',
-      'karma-phantomjs-launcher'
+      'karma-phantomjs-launcher',
+      'karma-nightmare'
     ],
     // its a little ugly that plugins are configured with top
     // level keys on this config object..
@@ -91,6 +94,11 @@ module.exports = function(config) {
     junitReporter: {
       // location of results output file
       outputFile: 'test-results/junit-results.xml'
+    },
+    nightmareOptions: {
+      width: 1048,
+      height: 600,
+      show: false,
     }
   });
 };
