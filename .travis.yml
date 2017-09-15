@@ -1,0 +1,8 @@
+language: node_js
+node_js:
+  - "6"
+before_install:
+before_script:
+script:
+  # should run both test-unit & test-e2e
+  - grunt test
